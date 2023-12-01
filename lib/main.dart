@@ -1,8 +1,6 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 
-void main() {
+main() {
   runApp(MyApp());
 }
 
@@ -12,37 +10,47 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        backgroundColor: Color.fromARGB(234, 240, 240, 243),
         appBar: AppBar(
           backgroundColor: Color.fromARGB(221, 81, 79, 224),
-          title: Center(
-            child: Text(
-              "My Apps",
-              style: TextStyle(
+          title: Text(
+            'Column',
+            style: TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
                 fontSize: 19,
                 fontFamily: 'Poppins'
               ),
-            ),
           ),
         ),
-        body: Center(
-          child: Text(
-            "Jangan saya kan mencari hewan kalau tidak orang kepada orang tidak mau jika saya memanggil disebut akan jalan menuju langka pernah bangun kepada tidak akan memberikan sesuatu paling tidak akan mengunjungi rumah bila tetapi membuat jalan akan waktu tidak bisa orang orang akan memanggil nama dengan sebutan siapa kan ada.",
-            // maxLines: 2,
-            // overflow: TextOverflow.ellipsis,
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: Color.fromARGB(221, 0, 0, 0),
-              fontSize: 14,
-              fontWeight: FontWeight.w500,
-              fontFamily: 'Poppins',
-              // decoration: TextDecoration.underline,
-              // decorationStyle: TextDecorationStyle.solid,
-              // decorationColor: Colors.red,
+        //untuk mengatur row/column adalah kebalikan dari bootstrap (Row Horizontal -> Column Vertikal)
+        // Row
+        // Column
+        // Stack -> Berurut Kedepan
+        body: Stack( 
+          // mainAxisAlignment: MainAxisAlignment.end, 
+          // crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              height: 400,
+              width: 300,
+              color: Colors.green,
             ),
-          ),
+            Container(
+              height: 250,
+              width: 150,
+              color: Color.fromARGB(255, 240, 70, 19),
+            ),
+            Container(
+              height: 300,
+              width: 120,
+              color: Color.fromARGB(255, 207, 240, 19),
+            ),
+            Container(
+              height: 150,
+              width: 50,
+              color: Color.fromARGB(255, 19, 240, 185),
+            ),
+          ],
         ),
       ),
     );
