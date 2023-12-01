@@ -1,56 +1,78 @@
 import 'package:flutter/material.dart';
 
-main() {
+void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  final List<Color> myColor = [
+    Color.fromARGB(255, 244, 130, 54),
+    Color.fromARGB(255, 54, 200, 244),
+    Color.fromARGB(255, 244, 54, 54),
+    Color.fromARGB(255, 138, 79, 40),
+  ];
+
+  final List<Widget> myList = List.generate(100, 
+    (index) => Text(
+      "${index+1}",
+      style: TextStyle(
+        fontSize: 20 + double.parse(index.toString()),
+        fontFamily: 'Poppins'
+      ),
+    ));
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
+        backgroundColor: Color.fromARGB(234, 240, 240, 243),
         appBar: AppBar(
           backgroundColor: Color.fromARGB(221, 81, 79, 224),
-          title: Text(
-            'Column',
-            style: TextStyle(
+          title: Center(
+            child: Text(
+              "List View",
+              style: TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
                 fontSize: 19,
                 fontFamily: 'Poppins'
               ),
-          ),
+            ),
+          )
         ),
-        //untuk mengatur row/column adalah kebalikan dari bootstrap (Row Horizontal -> Column Vertikal)
-        // Row
-        // Column
-        // Stack -> Berurut Kedepan
-        body: Stack( 
-          // mainAxisAlignment: MainAxisAlignment.end, 
-          // crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              height: 400,
-              width: 300,
-              color: Colors.green,
-            ),
-            Container(
-              height: 250,
-              width: 150,
-              color: Color.fromARGB(255, 240, 70, 19),
-            ),
-            Container(
-              height: 300,
-              width: 120,
-              color: Color.fromARGB(255, 207, 240, 19),
-            ),
-            Container(
-              height: 150,
-              width: 50,
-              color: Color.fromARGB(255, 19, 240, 185),
-            ),
-          ],
+        // body: ListView.builder(
+        //   itemCount: myColor.length, //Buat 4 List
+        //   itemBuilder: (context, index) {
+        //     return Container(
+        //       width: 300,
+        //       height: 300,
+        //       color: myColor[index], //index dari function itemBuilder jadi seakan dilooping otomatis
+        //     );
+        //   },
+        // ),
+        // body: ListView.separated( //ListView.separated bisa memberikan jarak antar komponen menggunakan separatedBuilder
+        //   separatorBuilder: (context, index) {
+        //     // return Container(
+        //     //   height: 10,
+        //     //   color: Color.fromARGB(221, 81, 79, 224),
+        //     // );
+        //     return Divider(
+        //       color: Color.fromARGB(221, 81, 79, 224),
+        //     );
+        //   },
+        //   itemCount: myColor.length, //Buat 4 List
+        //   itemBuilder: (context, index) {
+        //     // return Container(
+        //     //   width: 300,
+        //     //   height: 300,
+        //     //   color: myColor[index], //index dari function itemBuilder jadi seakan dilooping otomatis
+        //     // );
+        //     return myList;
+        //   },
+        // ),
+        body: ListView(
+          children: myList,
         ),
       ),
     );
