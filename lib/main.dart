@@ -5,22 +5,28 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  final List<Color> myColor = [
-    Color.fromARGB(255, 244, 130, 54),
-    Color.fromARGB(255, 54, 200, 244),
-    Color.fromARGB(255, 244, 54, 54),
-    Color.fromARGB(255, 138, 79, 40),
-  ];
-
-  final List<Widget> myList = List.generate(100, 
-    (index) => Text(
-      "${index+1}",
-      style: TextStyle(
-        fontSize: 20 + double.parse(index.toString()),
-        fontFamily: 'Poppins'
+  List<Widget> generateChatTiles(String title, String subtitle, String time) {
+    return [
+      ListTile(
+      contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 2),
+      title: Text(title,
+        style: TextStyle(
+          fontSize: 16,
+          fontWeight: FontWeight.w500,
+        ),
       ),
-    ));
-
+      subtitle: Text(subtitle,
+        overflow: TextOverflow.ellipsis,
+      ),
+      dense: true,
+      leading: CircleAvatar(backgroundColor: Color.fromARGB(221, 81, 79, 224),
+      ),
+      trailing: Text(time),
+    ),
+    Divider()
+    ];
+  }
+  
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -31,48 +37,32 @@ class MyApp extends StatelessWidget {
           backgroundColor: Color.fromARGB(221, 81, 79, 224),
           title: Center(
             child: Text(
-              "List View",
+              "List Tile",
               style: TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
                 fontSize: 19,
-                fontFamily: 'Poppins'
+                fontFamily: 'Poppins',
               ),
             ),
-          )
+          ),
         ),
-        // body: ListView.builder(
-        //   itemCount: myColor.length, //Buat 4 List
-        //   itemBuilder: (context, index) {
-        //     return Container(
-        //       width: 300,
-        //       height: 300,
-        //       color: myColor[index], //index dari function itemBuilder jadi seakan dilooping otomatis
-        //     );
-        //   },
-        // ),
-        // body: ListView.separated( //ListView.separated bisa memberikan jarak antar komponen menggunakan separatedBuilder
-        //   separatorBuilder: (context, index) {
-        //     // return Container(
-        //     //   height: 10,
-        //     //   color: Color.fromARGB(221, 81, 79, 224),
-        //     // );
-        //     return Divider(
-        //       color: Color.fromARGB(221, 81, 79, 224),
-        //     );
-        //   },
-        //   itemCount: myColor.length, //Buat 4 List
-        //   itemBuilder: (context, index) {
-        //     // return Container(
-        //     //   width: 300,
-        //     //   height: 300,
-        //     //   color: myColor[index], //index dari function itemBuilder jadi seakan dilooping otomatis
-        //     // );
-        //     return myList;
-        //   },
-        // ),
         body: ListView(
-          children: myList,
+          children: [
+            ...generateChatTiles("Wisnu", "Bg windah live gak?", "10:15 AM"),
+            ...generateChatTiles("Dosen Killer", "Jangan TELATTT!!!", "17:45 PM"),
+            ...generateChatTiles("Achmad Syahrian", "saya mau membuat program yang bertujuan untuk men-generate kata - kata dalam bahasa Indonesia secara acak. Jumlah katanya bedasarkan input dari User. Saya mau tau, apakah ada semacam API ato Library untuk kamus bahasa Indonesia?", "21:05 PM"),
+            ...generateChatTiles("Wisnu", "Bg windah live gak?", "10:15 AM"),
+            ...generateChatTiles("Dosen Killer", "Jangan TELATTT!!!", "17:45 PM"),
+            ...generateChatTiles("Wisnu", "Bg windah live gak?", "10:15 AM"),
+            ...generateChatTiles("Dosen Killer", "Jangan TELATTT!!!", "17:45 PM"),
+            ...generateChatTiles("Wisnu", "Bg windah live gak?", "10:15 AM"),
+            ...generateChatTiles("Dosen Killer", "Jangan TELATTT!!!", "17:45 PM"),
+            ...generateChatTiles("Wisnu", "Bg windah live gak?", "10:15 AM"),
+            ...generateChatTiles("Dosen Killer", "Jangan TELATTT!!!", "17:45 PM"),
+            ...generateChatTiles("Wisnu", "Bg windah live gak?", "10:15 AM"),
+            ...generateChatTiles("Dosen Killer", "Jangan TELATTT!!!", "17:45 PM"),
+          ],
         ),
       ),
     );
