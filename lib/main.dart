@@ -1,36 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:faker/faker.dart';
 
 void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  List<Widget> generateChatTiles(String title, String subtitle, String time) {
-    return [
-      ListTile(
-      contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 2),
-      title: Text(title,
-        style: TextStyle(
-          fontSize: 16,
-          fontWeight: FontWeight.w500,
-        ),
-      ),
-      subtitle: Text(subtitle,
-        overflow: TextOverflow.ellipsis,
-      ),
-      dense: true,
-      leading: CircleAvatar(
-        // backgroundColor: Color.fromARGB(221, 81, 79, 224),
-        backgroundImage: AssetImage(
-          "images/mypict.jpg",
-        ),
-      ),
-      trailing: Text(time),
-    ),
-    Divider()
-    ];
-  }
-  
+  var faker = new Faker();
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -41,7 +17,7 @@ class MyApp extends StatelessWidget {
           backgroundColor: Color.fromARGB(221, 81, 79, 224),
           title: Center(
             child: Text(
-              "WhatsApp",
+              "Extract Widget",
               style: TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
@@ -51,24 +27,52 @@ class MyApp extends StatelessWidget {
             ),
           ),
         ),
-        body: ListView(
-          children: [
-            ...generateChatTiles("Wisnu", "Bg windah live gak?", "10:15 AM"),
-            ...generateChatTiles("Dosen Killer", "Jangan TELATTT!!!", "17:45 PM"),
-            ...generateChatTiles("Achmad Syahrian", "saya mau membuat program yang bertujuan untuk men-generate kata - kata dalam bahasa Indonesia secara acak. Jumlah katanya bedasarkan input dari User. Saya mau tau, apakah ada semacam API ato Library untuk kamus bahasa Indonesia?", "21:05 PM"),
-            ...generateChatTiles("Wisnu", "Bg windah live gak?", "10:15 AM"),
-            ...generateChatTiles("Dosen Killer", "Jangan TELATTT!!!", "17:45 PM"),
-            ...generateChatTiles("Wisnu", "Bg windah live gak?", "10:15 AM"),
-            ...generateChatTiles("Dosen Killer", "Jangan TELATTT!!!", "17:45 PM"),
-            ...generateChatTiles("Wisnu", "Bg windah live gak?", "10:15 AM"),
-            ...generateChatTiles("Dosen Killer", "Jangan TELATTT!!!", "17:45 PM"),
-            ...generateChatTiles("Wisnu", "Bg windah live gak?", "10:15 AM"),
-            ...generateChatTiles("Dosen Killer", "Jangan TELATTT!!!", "17:45 PM"),
-            ...generateChatTiles("Wisnu", "Bg windah live gak?", "10:15 AM"),
-            ...generateChatTiles("Dosen Killer", "Jangan TELATTT!!!", "17:45 PM"),
-          ],
+        body: ListView.builder(
+          itemCount: 10,
+          itemBuilder: (context, index) {
+            return Column(
+              children: [
+                ChatItem(
+                  imageUrl: "https://picsum.photos/id/${index + 2}/100/100",
+                  title: faker.person.name(),
+                  subtitle: faker.lorem.sentence(),
+                ),
+                Divider(),
+              ],
+            );
+          },
         ),
       ),
+    );
+  }
+}
+
+class ChatItem extends StatelessWidget {
+  final String imageUrl;
+  final String title;
+  final String subtitle;
+  
+  const ChatItem({this.imageUrl = 'images/mypict.jpg', this.title = 'Achrian', this.subtitle = 'Lorem ipsum'});
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      leading: CircleAvatar(
+        backgroundColor: Color.fromARGB(221, 81, 79, 224),
+        backgroundImage: NetworkImage(imageUrl),
+      ),
+      contentPadding: EdgeInsets.symmetric(horizontal: 25, vertical: 3),
+      dense: true,
+      title: Text(title, 
+        style: TextStyle(
+          fontSize: 15,
+          fontWeight: FontWeight.w600
+        ),
+      ),
+      subtitle: Text(subtitle,
+        overflow: TextOverflow.ellipsis,
+      ),
+      trailing: Text("09.00 AM"),
     );
   }
 }
