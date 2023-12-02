@@ -19,7 +19,11 @@ class MyApp extends StatelessWidget {
         overflow: TextOverflow.ellipsis,
       ),
       dense: true,
-      leading: CircleAvatar(backgroundColor: Color.fromARGB(221, 81, 79, 224),
+      leading: CircleAvatar(
+        // backgroundColor: Color.fromARGB(221, 81, 79, 224),
+        backgroundImage: AssetImage(
+          "images/mypict.jpg",
+        ),
       ),
       trailing: Text(time),
     ),
@@ -37,7 +41,7 @@ class MyApp extends StatelessWidget {
           backgroundColor: Color.fromARGB(221, 81, 79, 224),
           title: Center(
             child: Text(
-              "List Tile",
+              "WhatsApp",
               style: TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
