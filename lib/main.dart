@@ -1,37 +1,50 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+
 void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner : false,
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
           backgroundColor: Color.fromARGB(221, 81, 79, 224),
-          title: Center(
-            child: Text(
-              "Date Time",
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-                fontSize: 19,
-                fontFamily: 'Poppins',
-              ),
-            ),
+          // centerTitle: true,
+          leading: Container(
+            color: Colors.black38,
           ),
-        ),
-        body: Center(
-          child: Text(
-            DateFormat.yMMMMd('en_US').format(DateTime.now()), //https://pub.dev/documentation/intl/latest/intl/DateFormat-class.html
-              style: TextStyle(
-                fontSize: 25
-              ),
+          leadingWidth: 50,
+          title: Container(
+            // width: 50,
+            height: 35,
+            color: Colors.green,
+          ),
+          // titleSpacing: 40,
+          actions: [
+            Container(
+              width: 50,
+              color: Colors.yellow,
             ),
+            Container(
+              width: 70,
+              color:Color.fromARGB(255, 59, 232, 255),
+            ),
+          ],
+          bottom: PreferredSize(
+            preferredSize: Size.fromHeight(200), // menambah hight appbar (Wajib)
+            child: Container(
+                width: 50,
+                height: 100,
+                color: Colors.red,
+              ),
+          ),
+          flexibleSpace: Container(
+            height: 50,
+            color: Colors.grey,
+          ),
         ),
       ),
     );
