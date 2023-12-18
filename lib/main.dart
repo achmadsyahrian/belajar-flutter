@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:first_project/partials/appbar.dart';
 import 'package:flutter/material.dart';
 
@@ -8,40 +6,70 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  final List<Container> myList = List.generate(99, (index) {
-    return Container(
-      // height: 500,
-      // width: 1500,
-      color: Color.fromARGB(255, Random().nextInt(256), Random().nextInt(256), Random().nextInt(256)),
-    );
-  });
-  
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        appBar: appBar("Grid View"),
-        body: 
-        // GridView(
-        //   padding: EdgeInsets.all(10),
-        //   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        //     crossAxisCount: 3,
-        //     crossAxisSpacing: 10,
-        //     mainAxisSpacing: 10,
-        //     childAspectRatio: 3/3,
-        //   ),
-        //   children: myList,
-        // ),
-        GridView.count( //tidak perlu memakai gridDelegate
-          padding: EdgeInsets.all(12),
-          crossAxisCount: 3,
-          crossAxisSpacing: 10,
-          mainAxisSpacing: 10,
-          // childAspectRatio: 3/4,
-          children: myList,
-        )
+      theme: ThemeData(fontFamily: 'Poppins'),
+      darkTheme: ThemeData.dark(),
+      home: MyHomePage(),
+    );
+  }
+}
+
+class MyHomePage extends StatefulWidget {
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  String data = "Belum ada input";
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: appBar("Dialog"),
+      body: Center(
+        child: Text(data, style: TextStyle(fontSize: 20),),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          showDialog( //fungsi untuk menampilkan dialog/alert
+            context: context, 
+            builder: (context) {
+              return AlertDialog(
+                title: Text("Confirmation"),
+                content: Text("Are you sure to delete this data?"),
+                actions: [
+                  TextButton( //button yg hanya berupa text (Tanpa border tombol)
+                    onPressed: () {
+                      setState(() {
+                        data = "Data Deletion Canceled !";
+                      });
+                      Navigator.pop(context, false); //menghapus lapisan terluar / popup nya
+                    }, 
+                    child: Text("No"),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      setState(() {
+                        data = "Delete Data Successfully !";
+                      });
+                      Navigator.pop(context, true); //menghapus lapisan terluar / popup nya
+                    }, 
+                    child: Text("Yes"),
+                  )
+                ],
+                // backgroundColor: Color.fromARGB(221, 81, 79, 224),
+                // icon: Icon(Icons.confirmation_number_sharp),
+              );
+            }
+          ).then((value) => print(value)); 
+        },
+        child: Icon(Icons.delete_outlined, color: Colors.white),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }
