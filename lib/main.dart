@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:first_project/partials/appbar.dart';
 import 'package:flutter/material.dart';
 
@@ -5,60 +7,40 @@ void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatefulWidget {
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  final TextEditingController myController = TextEditingController();
-
-  String hasil = "Hasil Input";
-
+class MyApp extends StatelessWidget {
+  final List<Container> myList = List.generate(99, (index) {
+    return Container(
+      // height: 500,
+      // width: 1500,
+      color: Color.fromARGB(255, Random().nextInt(256), Random().nextInt(256), Random().nextInt(256)),
+    );
+  });
+  
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(fontFamily: 'Poppins'),
       home: Scaffold(
-        appBar: appBar("Control Text Field"),
-        body: Center(
-          child: Padding(
-            padding: const EdgeInsets.all(30),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                TextField(
-                  decoration: InputDecoration(
-                    suffixIcon: IconButton(
-                      onPressed: () {
-                        setState(() {
-                          myController.text = "";
-                          hasil = "";
-                        });
-                      } , 
-                      icon: Icon(Icons.disabled_by_default),
-                    )
-                  ),
-                  controller: myController,
-                  onChanged: (value) {
-                    setState(() {
-                      hasil = value;
-                    });
-                  } ,
-                  // onSubmitted: (value) {
-                    
-                  // },
-                  // onEditingComplete: () {
-                  //   print("Edit Success");
-                  //   print(myController.text);
-                  // },
-                ),
-                Text(hasil),
-              ],
-            ),
-          ),
-        ),
+        appBar: appBar("Grid View"),
+        body: 
+        // GridView(
+        //   padding: EdgeInsets.all(10),
+        //   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        //     crossAxisCount: 3,
+        //     crossAxisSpacing: 10,
+        //     mainAxisSpacing: 10,
+        //     childAspectRatio: 3/3,
+        //   ),
+        //   children: myList,
+        // ),
+        GridView.count( //tidak perlu memakai gridDelegate
+          padding: EdgeInsets.all(12),
+          crossAxisCount: 3,
+          crossAxisSpacing: 10,
+          mainAxisSpacing: 10,
+          // childAspectRatio: 3/4,
+          children: myList,
+        )
       ),
     );
   }
