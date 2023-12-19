@@ -4,6 +4,7 @@ AppBar appBar(text) {
     return AppBar(
         backgroundColor: Color.fromARGB(221, 81, 79, 224),
         centerTitle: true,
+        leading: Container(),
         titleTextStyle: TextStyle(
           color: Colors.white,
           fontWeight: FontWeight.bold,

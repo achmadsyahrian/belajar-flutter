@@ -1,27 +1,27 @@
-import 'package:first_project/navigations/page1.dart';
+import 'package:first_project/pages/navigation/page2.dart';
 import 'package:first_project/partials/appbar.dart';
 import 'package:flutter/material.dart';
 
-class PageTwo extends StatelessWidget {
+class PageOne extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBar("Page 2"),
+      appBar: appBar("Page 1"),
       body: Center(
-        child: Text("THIS PAGE TWO", style: TextStyle(fontSize: 20, fontFamily: 'Poppins'),),
+        child: Text("THIS PAGE ONE", style: TextStyle(fontSize: 20, fontFamily: 'Poppins'),),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.pushReplacement(context, MaterialPageRoute(
-            builder: (context) => PageOne(),
+            builder: (context) => PageTwo(),
             )
           );
         },
-        backgroundColor: Color.fromARGB(221, 81, 79, 224),
+        backgroundColor: Color.fromRGBO(81, 79, 224, 0.867),
         foregroundColor: Colors.white,
         hoverColor: Color.fromARGB(221, 67, 64, 240),
-        child: Icon(Icons.keyboard_arrow_left),
+        child: Icon(Icons.keyboard_arrow_right),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.miniCenterFloat,
     );

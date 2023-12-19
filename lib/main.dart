@@ -1,5 +1,6 @@
-import 'package:first_project/navigations/page1.dart';
-import 'package:first_project/navigations/page2.dart';
+import 'package:first_project/pages/route/gallery_page.dart';
+import 'package:first_project/pages/route/home_page.dart';
+import 'package:first_project/pages/route/photo_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -7,11 +8,21 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-
+  
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: PageOne(),
+      debugShowCheckedModeBanner: false,
+      home: HomePage(),
+      darkTheme: ThemeData.dark(),
+      initialRoute: HomePage.routeName,
+      routes: {
+        HomePage.routeName: (context) => HomePage(),
+        GalleryPage.routeName: (context) => GalleryPage(),
+        PhotoPage.routeName: (context) => PhotoPage(),
+      },
     );
   }
 }
+
+
