@@ -10,45 +10,37 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: HomePage(),
-    );
-  }
-}
-class HomePage extends StatelessWidget {
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: appBar("Flexible & Expanded"),
-      body: Row(
-        children: [
-          Flexible(
-            fit: FlexFit.tight,
-            child: Container(
-              color: Colors.red,
-              height: 100,
-              child: Text("Text 1 aisdgiaudsygjahsdgkasdadsadsads"),
-            ),
+      home: Scaffold(
+        appBar: appBar("Fitted Box"),
+        body: Center(
+          child: Row(
+            children: [
+              Container(
+                width: 200,
+                height: 100,
+                color: Colors.red,
+                child: Center(
+                  child: FittedBox(
+                    child: Text("Hello Duniaasdadsadsadsadsadsasdadasd"),
+                  ),
+                ),
+              ),
+              Container(
+                width: 200,
+                height: 100,
+                color: const Color.fromARGB(255, 54, 244, 95),
+                child: Center(
+                  child: FittedBox(
+                    // alignment: Alignment.topRight,
+                    fit: BoxFit.fill,
+                    child: Image.asset('images/flower.jpg'), 
+                    ),
+                  ),
+                ),
+            ],
           ),
-          Container(
-            color: Colors.yellow,
-            height: 100,
-            child: Text("Text 1"),
-          ),
-          Expanded(
-            // fit: FlexFit.tight,
-            child: Container(
-              height: 100,
-              color: Colors.blue,
-              child: Text("Text 1"),
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }
 }
-
-
-
