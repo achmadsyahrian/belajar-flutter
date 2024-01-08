@@ -1,5 +1,4 @@
 import 'package:first_project/partials/appbar.dart';
-import 'package:flutter/cupertino.dart'; //https://docs.flutter.dev/ui/widgets/cupertino
 import 'package:flutter/material.dart';
 
 void main() {
@@ -16,30 +15,41 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHome extends StatelessWidget {
+class MyHome extends StatefulWidget {
+  @override
+  State<MyHome> createState() => _MyHomeState();
+}
+
+class _MyHomeState extends State<MyHome> {
+  DateTime selectDate = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBar("Cupertino"),
+      appBar: appBar("Date Picker"),
       body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            showDialog(context: context, builder: (context) {
-              return CupertinoAlertDialog(
-                title: Text("Delete Item"),
-                content: Text("Google uses cookies to deliver its services, to personalize ads, and to analyze traffic. You can adjust your privacy controls anytime in your Google settings. Learn more."),
-                actions: [
-                  TextButton(onPressed: () {}, child: Text("No")),
-                  TextButton(onPressed: () {}, child: Text("Yes")),
-                ],
-              );
-            });
-          },
-          child: Text("Alert Dialog"),  
-        )
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Text(selectDate.toString(), style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+            OutlinedButton(onPressed: () {
+              showDatePicker(
+                context: context, 
+                initialDate: selectDate,
+                firstDate: DateTime(2000), 
+                lastDate: DateTime(2025),
+                initialEntryMode: DatePickerEntryMode.calendarOnly,
+              ).then((value) {
+                setState(() {
+                  selectDate = value!;  
+                });
+              });
+            }, 
+              child: Text("Date Picker")
+            ),
+          ],
+        ),
       ),
     );
   }
 }
-
