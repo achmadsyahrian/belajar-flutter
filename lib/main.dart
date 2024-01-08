@@ -1,4 +1,5 @@
 import 'package:first_project/partials/appbar.dart';
+import 'package:flutter/cupertino.dart'; //https://docs.flutter.dev/ui/widgets/cupertino
 import 'package:flutter/material.dart';
 
 void main() {
@@ -11,57 +12,34 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: MyHome(),
-      debugShowCheckedModeBanner: false,
     );
   }
 }
-
 
 class MyHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final widthApp = MediaQuery.sizeOf(context).width;
-    final heightApp = MediaQuery.sizeOf(context).height;
-    final paddingTop = MediaQuery.paddingOf(context).top;
-
-    final myAppBar = appBar("Layouting Builder");
-    
-    final heightBody = heightApp - paddingTop - myAppBar.preferredSize.height;
-    
     return Scaffold(
-      appBar: myAppBar,
-      body: Container(
-        width: widthApp,
-        height: heightBody * 0.5,
-        color: Colors.black,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            MyContainer(widthApp),
-            MyContainer(widthApp),
-            MyContainer(widthApp),
-          ],
-        ),
+      appBar: appBar("Cupertino"),
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () {
+            showDialog(context: context, builder: (context) {
+              return CupertinoAlertDialog(
+                title: Text("Delete Item"),
+                content: Text("Google uses cookies to deliver its services, to personalize ads, and to analyze traffic. You can adjust your privacy controls anytime in your Google settings. Learn more."),
+                actions: [
+                  TextButton(onPressed: () {}, child: Text("No")),
+                  TextButton(onPressed: () {}, child: Text("Yes")),
+                ],
+              );
+            });
+          },
+          child: Text("Alert Dialog"),  
+        )
       ),
     );
   }
 }
 
-class MyContainer extends StatelessWidget {
-  final double widthApp;
-  MyContainer(this.widthApp);
-  
-  @override
-  Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        return Container(
-          width: widthApp * 0.3,
-          height: constraints.maxHeight * 0.8,
-          color: Colors.blue,
-        );
-      },
-    );
-  }
-}
