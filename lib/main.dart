@@ -10,37 +10,58 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        appBar: appBar("Fitted Box"),
-        body: Center(
-          child: Row(
-            children: [
-              Container(
-                width: 200,
-                height: 100,
-                color: Colors.red,
-                child: Center(
-                  child: FittedBox(
-                    child: Text("Hello Duniaasdadsadsadsadsadsasdadasd"),
-                  ),
-                ),
-              ),
-              Container(
-                width: 200,
-                height: 100,
-                color: const Color.fromARGB(255, 54, 244, 95),
-                child: Center(
-                  child: FittedBox(
-                    // alignment: Alignment.topRight,
-                    fit: BoxFit.fill,
-                    child: Image.asset('images/flower.jpg'), 
-                    ),
-                  ),
-                ),
-            ],
-          ),
+      home: MyHome(),
+      debugShowCheckedModeBanner: false,
+    );
+  }
+}
+
+
+class MyHome extends StatelessWidget {
+
+  @override
+  Widget build(BuildContext context) {
+    final widthApp = MediaQuery.sizeOf(context).width;
+    final heightApp = MediaQuery.sizeOf(context).height;
+    final paddingTop = MediaQuery.paddingOf(context).top;
+
+    final myAppBar = appBar("Layouting Builder");
+    
+    final heightBody = heightApp - paddingTop - myAppBar.preferredSize.height;
+    
+    return Scaffold(
+      appBar: myAppBar,
+      body: Container(
+        width: widthApp,
+        height: heightBody * 0.5,
+        color: Colors.black,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            MyContainer(widthApp),
+            MyContainer(widthApp),
+            MyContainer(widthApp),
+          ],
         ),
       ),
+    );
+  }
+}
+
+class MyContainer extends StatelessWidget {
+  final double widthApp;
+  MyContainer(this.widthApp);
+  
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return Container(
+          width: widthApp * 0.3,
+          height: constraints.maxHeight * 0.8,
+          color: Colors.blue,
+        );
+      },
     );
   }
 }
