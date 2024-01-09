@@ -8,7 +8,7 @@ class MyApp extends StatelessWidget {
   final List<Color> myColor = [
     Color.fromARGB(255, 244, 130, 54),
     Color.fromARGB(255, 54, 200, 244),
-    Color.fromARGB(255, 244, 54, 54),
+    Color.fromARGB(255, 196, 43, 43),
     Color.fromARGB(255, 138, 79, 40),
   ];
 
